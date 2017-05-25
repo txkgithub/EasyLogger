@@ -264,10 +264,13 @@ void elog_async_output_notice(void) {
     sem_post(&output_notice);
 }
 
+#include <unistd.h>
 static void *async_output(void *arg) {
     size_t get_log_size = 0;
     static char poll_get_buf[ELOG_ASYNC_POLL_GET_LOG_BUF_SIZE];
-
+    
+    /*add by txk*/
+    usleep(1000);
     ELOG_ASSERT(init_ok);
 
     while(true) {
